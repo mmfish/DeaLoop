@@ -1,0 +1,14 @@
+import {ShortlistPanel} from '../../shortlist';
+import {Shortlists} from '@/backend/shortlist';
+import {notFound} from 'next/navigation';
+import {Shell,Back,money} from '../../ui';
+import {repository} from '../../data';
+import {getUser} from '../../auth';
+import {WantedArt} from '../../wanted-art';
+import {ArchiveButton} from '../../widgets';
+import {MapPin,Truck,Check,Package,Sparkles} from 'lucide-react';
+export const dynamic='force-dynamic';
+export default async function Detail({params,searchParams}:{params:Promise<{id:string}>;searchParams:Promise<{published?:string}>}){
+ const {id}=await params;const p=await repository().post(id);if(!p)notFound();const user=await getUser();const own=user?.userId===p.owner_id;const wanted=p.type==='wanted';const query=await searchParams;const shortlist=await new Shortlists(repository().db).public(id);
+ return <Shell><Back/>{query.published&&own&&<div className="success-banner"><Check size={18}/>Your post is published. People and their agents can now discover it.</div>}<div className="detail-grid"><div className={'detail-photo '+(wanted?'wanted-photo':'')}>{p.image?<img src={p.image} alt={p.title}/>:wanted?<WantedArt category={p.category} detail/>:<div className="detail-placeholder"><Package size={70} strokeWidth={1}/><h2>Ready for its next chapter.</h2></div>}{!!p.demo&&<span className="detail-sample">Example listing · not a real offer</span>}</div><section className="detail-info"><div className={'post-tag inline '+(wanted?'wanted':'sale')}>{wanted?'WANTED':'FOR SALE'}{p.status==='active'?'':' · '+p.status.toUpperCase()}</div><h1>{p.title}</h1><p className="detail-price">{wanted&&<span>Budget up to </span>}{money(p.price)}</p><div className="detail-meta"><span><MapPin size={17}/>{p.location}</span><span><Truck size={17}/>{p.delivery==='local_pickup'?'Local pickup':p.delivery==='shipping'?'Shipping':'Pickup or shipping'}</span><span><Check size={17}/>{p.condition}</span></div><hr/><h2>{wanted?'What I’m looking for':'About this find'}</h2><p className="description">{p.description}</p><div className="owner-box"><span className="avatar">{p.owner_name[0]}</span><div><strong>{own?'You':p.owner_name}</strong><span>{p.agent_id?<><Sparkles size={13}/> Posted by your agent</>:'Posted '+new Date(p.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'})}</span></div></div><div className="offer-entry">{!p.demo&&(own?<a className="button primary" href={'/offers?post_id='+p.id}>View offers & conversations</a>:p.status==='active'?<a className="button primary" href={'/posts/'+p.id+'/offer'}>{wanted?'I have something to offer':'Make an offer'}</a>:<p className="quiet-note">This post is {p.status}.</p>)}{own&&p.status==='active'&&<ArchiveButton id={p.id}/>} {!!p.demo&&<p className="quiet-note">This is an example listing. Publish a real demo post to try offers.</p>}</div></section></div>{!p.demo&&<ShortlistPanel shortlist={shortlist} own={own}/>}</Shell>;
+}

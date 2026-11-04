@@ -1,0 +1,6 @@
+import {Shell,PageHeading,Empty} from '../ui';
+import {repository} from '../data';
+import {requireUser} from '../auth';
+import {Plus,Link2,Archive,ShieldCheck} from 'lucide-react';
+export const dynamic='force-dynamic';
+export default async function Activity(){const user=await requireUser('/activity');const events=await repository().activity(user.userId);return <Shell active="activity"><div className="narrow"><PageHeading eyebrow="NOTHING LOST IN THE LOOP" title="Your marketplace, in motion." description="A clear history of what you and your agents have done."/>{!events.length?<Empty title="A fresh start." href="/new" label="Create your first post">New posts and connection changes will appear here.</Empty>:<div className="timeline">{events.map(e=>{const Icon=e.kind==='post_published'?Plus:e.kind==='post_archived'?Archive:e.kind==='connection_revoked'?ShieldCheck:Link2;return <article key={e.id}><span className="timeline-icon"><Icon size={19}/></span><div><span className="event-actor">{e.actor}</span><h3>{e.summary}</h3><time dateTime={new Date(e.created_at).toISOString()}>{new Date(e.created_at).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:'UTC'})} UTC</time>{e.post_id&&<a href={'/posts/'+e.post_id}>View post ↗</a>}</div></article>;})}</div>}</div></Shell>;}

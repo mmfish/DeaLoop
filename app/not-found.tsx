@@ -1,0 +1,1 @@
+export default function NotFound(){return <main className="not-found"><h1>This find has wandered off.</h1><p>The post or page couldn’t be found.</p><a className="button primary" href="/">Back to marketplace</a></main>;}

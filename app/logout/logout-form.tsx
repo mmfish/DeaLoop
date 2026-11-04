@@ -1,0 +1,3 @@
+'use client';
+import {useState} from 'react';
+export function LogoutForm(){const [busy,setBusy]=useState(false),[error,setError]=useState('');return <div className="form-panel"><button className="button primary" disabled={busy} onClick={async()=>{setBusy(true);try{const response=await fetch('/api/auth/logout',{method:'POST'});if(!response.ok)throw Error();window.location.assign('/login');}catch{setError('Could not sign out. Please try again.');setBusy(false);}}}>{busy?'Signing out…':'Sign out'}</button> <a className="button" href="/">Keep browsing</a>{error&&<p role="alert">{error}</p>}</div>;}

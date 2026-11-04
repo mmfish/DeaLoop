@@ -1,0 +1,12 @@
+import {cpSync,mkdirSync,copyFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {resolve} from 'node:path';
+const destination=process.argv[2];if(!destination?.startsWith('/'))throw Error('Provide an absolute archive path outside the repository');
+if(resolve(destination).startsWith(process.cwd()+'/'))throw Error('Keep release artifacts outside the repository');
+cpSync('drizzle','.next/standalone/drizzle',{recursive:true});
+cpSync('public','.next/standalone/public',{recursive:true});
+cpSync('.next/static','.next/standalone/.next/static',{recursive:true});
+mkdirSync('.next/standalone/scripts/aws',{recursive:true});
+copyFileSync('scripts/aws/backup.mjs','.next/standalone/scripts/aws/backup.mjs');
+execFileSync('tar',['-czf',destination,'-C','.next/standalone','.'],{stdio:'inherit'});
+console.log(destination);
