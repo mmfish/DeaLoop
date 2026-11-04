@@ -2,6 +2,9 @@
 import {useState} from 'react';
 import {initializeApp,getApps} from 'firebase/app';
 import {getAuth,GoogleAuthProvider,FacebookAuthProvider,signInWithPopup,inMemoryPersistence,setPersistence,signOut} from 'firebase/auth';
+// Public Firebase web config by design (apiKey is a client identifier, not a
+// secret; it ships in the browser bundle). Secret-scanning alerts on it are
+// false positives — see config/README.md. Do not move it to .env.
 import config from '@/config/firebase.json';
 
 export function LoginForm({returnTo,currentName}:{returnTo:string;currentName:string|null}){

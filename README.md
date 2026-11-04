@@ -57,7 +57,7 @@ Open `http://localhost:3000`. SQLite is created at `data/dealoop.sqlite`, and mi
 
 | Configuration | Purpose |
 | --- | --- |
-| `config/firebase.json` | Public Firebase web configuration; replace with your project's configuration for an independent installation |
+| `config/firebase.json` | Public Firebase web configuration, intentionally committed (the `apiKey` is a client identifier, not a secret — see `config/README.md`); replace with your project's configuration for an independent installation |
 | `DEALOOP_ALLOWED_EMAILS` | Comma-separated invited, verified email addresses for new AWS account admission |
 | `DEALOOP_DB_PATH` | Optional SQLite path; defaults to `data/dealoop.sqlite` |
 | `DEALOOP_MIGRATIONS_PATH` | Optional migration directory; defaults to `drizzle/` |

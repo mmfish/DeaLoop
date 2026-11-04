@@ -1,3 +1,7 @@
+// Public Firebase web config (apiKey is a client identifier, not a secret; it
+// is also embedded in the browser bundle). Secret-scanning alerts on it are
+// false positives — see config/README.md. It is only used for the public
+// Identity Toolkit accounts:lookup call; ID tokens are verified via JWKS below.
 import firebaseConfig from '../config/firebase.json' with {type:'json'};
 import {createRemoteJWKSet, jwtVerify} from 'jose';
 import type {JWTVerifyGetKey} from 'jose';
