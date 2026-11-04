@@ -44,8 +44,8 @@ The live AWS deployment uses **Next.js, Node.js, SQLite, private S3-compatible L
 Use **Node.js 24** and npm. The package declares Node >=22.13; Node 24 is the AWS runtime and recommended local version.
 
 ```sh
-git clone git@github.com:YiY-Xu/meta_hackathon.git
-cd meta_hackathon
+git clone https://github.com/mmfish/DeaLoop.git
+cd DeaLoop
 npm ci
 npm run build:aws
 DEALOOP_BUILD_TARGET=aws DEALOOP_RUNTIME=aws \
