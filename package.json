@@ -21,7 +21,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1161.0",
     "@base-ui/react": "^1.7.0",
-    "@hookform/resolvers": "^5.7.1",
+    "@hookform/resolvers": "^7.0.1",
     "@modelcontextprotocol/sdk": "1.32.2",
     "@shadcn/react": "^0.3.0",
     "class-variance-authority": "0.7.1",
