@@ -1,0 +1,62 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1793572656273,
+      "tag": "0000_aberrant_cargill",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1793578344505,
+      "tag": "0001_majestic_betty_brant",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1793579325899,
+      "tag": "0002_deep_talon",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1793646210794,
+      "tag": "0003_fuzzy_madripoor",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1793655771946,
+      "tag": "0004_tough_tarantula",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1793665848699,
+      "tag": "0005_wealthy_chimera",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1793690065808,
+      "tag": "0006_whole_kingpin",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1793814628656,
+      "tag": "0007_rate_limit_expiry",
+      "breakpoints": true
+    }
+  ]
+}

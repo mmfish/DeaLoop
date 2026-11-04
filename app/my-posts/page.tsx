@@ -1,0 +1,6 @@
+import {Shell,PageHeading,Card,Empty} from '../ui';
+import {repository} from '../data';
+import {requireUser} from '../auth';
+import {Plus} from 'lucide-react';
+export const dynamic='force-dynamic';
+export default async function Mine(){const user=await requireUser('/my-posts');const posts=await repository().mine(user.userId);const active=posts.filter(p=>p.status==='active'),archived=posts.filter(p=>p.status!=='active');return <Shell active="posts"><PageHeading eyebrow="YOUR CORNER OF DeaLoop" title="Things you’re passing on. Things you’re after." description="Every post you and your agents publish, together in one place." action={<a className="button primary" href="/new"><Plus size={17}/>Create a post</a>}/><div className="section-heading"><h2>Active posts</h2><span>{active.length} posts</span></div>{active.length?<div className="post-grid">{active.map(p=><Card key={p.id} post={p}/>)}</div>:<Empty title="Your first post is waiting." href="/new" label="Create a post">Sell something you no longer need, or put a Wanted post out into the world.</Empty>}{archived.length>0&&<><div className="section-heading archived-heading"><h2>Closed & archived</h2><span>{archived.length} posts</span></div><div className="post-grid archived-grid">{archived.map(p=><Card key={p.id} post={p}/>)}</div></>}</Shell>;}
